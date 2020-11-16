@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>1_ajax小试牛刀</title>
+		<style>
+			#content{
+				width: 300px;
+				height: 100px;
+				border: 1px solid black;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>该页面是测试：ajax小试牛刀</h3>
+		<button id="btn">点我发送请求(原生js-ajax-get)</button>
+		<div id="content"></div>
+		<script type="text/javascript" >
+			//获取按钮
+			const btn = document.getElementById('btn')
+			const content = document.getElementById('content')
+			//给按钮绑定监听
+			btn.onclick = ()=>{
+				//1.创建xhr实例对象
+				const xhr = new XMLHttpRequest()
+
+				//on  当xxx时候
+				//ready 准备
+				//state 状态
+				//change 状态
+				//xhr内部有5种状态，值分别为：0、1、2、3、4
+				//xhr实例对象，在实例出来的那一刻状态就是0
+				xhr.onreadystatechange = ()=>{
+					if(xhr.readyState === 4){
+						console.log(xhr.response);
+						content.innerHTML = `<h3>${xhr.response}</h3>`
+					}
+				}
+
+				//2.指定发送请求的：method、url
+				xhr.open('GET','http://127.0.0.1:8080/test_get')
+				//3.发送请求
+				xhr.send()
+			}
+		</script>
+	</body>
+</html>
