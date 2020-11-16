@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>2_xhr的5种状态</title>
+		<style>
+			#content{
+				width: 300px;
+				height: 100px;
+				border: 1px solid black;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>该页面是测试：xhr的5种状态</h3>
+		<button id="btn">点我发送请求(原生js-ajax-get)</button>
+		<div id="content"></div>
+		<script type="text/javascript" >
+			//获取按钮
+			const btn = document.getElementById('btn')
+			const content = document.getElementById('content')
+			//给按钮绑定监听
+			btn.onclick = ()=>{
+				//1.创建xhr实例对象
+				const xhr = new XMLHttpRequest()
+
+				//xhr实例对象，在实例出来的那一刻状态就是0
+				/* 
+					xhr内部有5种状态，值分别为：0、1、2、3、4
+							0：实例出来的那一刻状态就是0，初始状态。
+							1：open已经调用了，但是send还没有调用，此时可以修改请求头内容。
+							2：send已经调用了，已经无法修改请求头
+							3：已经回来一部分数据了，小的数据会在此阶段一次性接收完毕，较大的数据有待进一步接收，响应头回来了。
+							4：数据全部接收完毕
+				*/
+				xhr.onreadystatechange = ()=>{
+					/* if(xhr.readyState === 1){
+						xhr.setRequestHeader('demo',123) //配置请求头
+					} */
+					/* if(xhr.readyState === 2){
+						xhr.setRequestHeader('demo',123) //配置请求头--报错
+					} */
+					/* if(xhr.readyState === 3){
+						console.log('3时接收到的数据',xhr.response);
+						console.log('3时接收到的响应头',xhr.getResponseHeader('content-length'));
+					} */
+					if(xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)){
+						console.log(xhr.response);
+						content.innerHTML = `<h3>${xhr.response}</h3>`
+					}
+				}
+
+				//2.指定发送请求的：method、url
+				xhr.open('GET','http://127.0.0.1:8080/test_get')
+				
+				//3.发送请求
+				xhr.send()
+			}
+		</script>
+	</body>
+</html>

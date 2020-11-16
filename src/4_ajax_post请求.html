@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>4_ajax_post请求</title>
+		<style>
+			#content{
+				width: 300px;
+				height: 100px;
+				border: 1px solid black;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>该页面是测试：ajax_post请求</h3>
+		<button id="btn">点我发送请求(原生js-ajax-post)</button>
+		<div id="content"></div>
+		<script type="text/javascript" >
+			//获取按钮
+			const btn = document.getElementById('btn')
+			const content = document.getElementById('content')
+			//给按钮绑定监听
+			btn.onclick = ()=>{
+				//1.创建xhr实例对象
+				const xhr = new XMLHttpRequest()
+
+				//绑定监听
+				xhr.onreadystatechange = ()=>{
+					if(xhr.readyState === 4 ){
+						if(xhr.status >= 200 && xhr.status < 300){
+							console.log(xhr.response);
+							content.innerHTML = `<h3>${xhr.response}</h3>`
+						}
+					}
+				}
+
+				//2.指定发送请求的：method、url、参数
+				xhr.open('POST','http://127.0.0.1:8080/test_post')
+
+				//追加响应头用于标识携带请求体参数的编码形式--urlencoded
+				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+
+				//追加响应头用于标识携带请求体参数的编码形式--json
+				// xhr.setRequestHeader('Content-type','application/json')
+				
+				//3.发送请求
+				const person = {name:'老刘',age:18}
+
+				xhr.send('name=老刘&age=18') //携带urlencoded编码形式的请求体参数
+				// xhr.send(JSON.stringify(person)) //携带json编码形式的请求体参数
+			}
+		</script>
+	</body>
+</html>
