@@ -34,7 +34,7 @@
 				}
 				
 				//配置请求
-				xhr.open('GET','http://127.0.0.1:8080/get_person')
+				xhr.open('GET','http://127.0.0.1:8080/get_person?t='+Date.now())
 
 				//responseType用于指定返回数据的格式
 				xhr.responseType = 'json'
