@@ -26,8 +26,17 @@ app.get('/test_get2/:name/:age',(request,response)=>{
 //响应get请求
 app.get('/get_person',(request,response)=>{
 	console.log('有人请求get_person了');
-	const person = {name:'晓飞678',age:18,sex:'女'}
+	const person = {name:'tom',age:18,sex:'女'}
 	response.send(JSON.stringify(person))
+})
+
+//响应get请求
+app.get('/get_person_delay',(request,response)=>{
+	console.log('有人请求get_person了');
+	const person = {name:'tom',age:18,sex:'女'}
+	setTimeout(()=>{
+		response.send(JSON.stringify(person))
+	},3000)
 })
 
 //响应POST请求--可以接收请求体参数
@@ -47,5 +56,8 @@ app.listen(8080,(err)=>{
 		console.log('http://127.0.0.1:8080/4_ajax_post请求.html');
 		console.log('http://127.0.0.1:8080/5_ajax_解析json数据.html');
 		console.log('http://127.0.0.1:8080/6_ajax_处理IE浏览器get请求缓存问题.html');
+		console.log('http://127.0.0.1:8080/7_ajax请求的异常与超时处理.html');
+		console.log('http://127.0.0.1:8080/8_ajax取消请求.html');
+		console.log('http://127.0.0.1:8080/9_避免多次重复请求.html');
 	}
 })
