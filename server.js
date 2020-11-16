@@ -46,6 +46,20 @@ app.post('/test_post',(request,response)=>{
 })
 
 
+//响应get请求---jquery
+app.get('/test_jquery_get',(request,response)=>{
+	console.log('有人请求test_jquery_get了',request.query);
+	const car = {name:'马自达·阿特兹',price:'25万'}
+	response.send(JSON.stringify(car))
+})
+
+//响应post请求----jquery
+app.post('/test_jquery_post',(request,response)=>{
+	console.log('有人请求test_jquery_post了',request.body);
+	const car = {name:'马自达·阿特兹',price:'25万'}
+	response.send(JSON.stringify(car))
+})
+
 //监听
 app.listen(8080,(err)=>{
 	if(!err) {
@@ -59,5 +73,7 @@ app.listen(8080,(err)=>{
 		console.log('http://127.0.0.1:8080/7_ajax请求的异常与超时处理.html');
 		console.log('http://127.0.0.1:8080/8_ajax取消请求.html');
 		console.log('http://127.0.0.1:8080/9_避免多次重复请求.html');
+		console.log('http://127.0.0.1:8080/10_jquery封装的ajax.html');
+		console.log('http://127.0.0.1:8080/11_演示回调地狱.html');
 	}
 })

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>10_jQuery封装的ajax</title>
+		<style>
+			#content{
+				width: 300px;
+				height: 100px;
+				border: 1px solid black;
+				margin-top: 10px;
+			}
+		</style>
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+	</head>
+	<body>
+		<h3>该页面是测试：jQuery封装的ajax</h3>
+		<button id="btn1">点我发送请求(jQuery-ajax-get)</button>
+		<button id="btn2">点我发送请求(jQuery-ajax-post)</button>
+		<div id="content"></div>
+		<script type="text/javascript" >
+			const btn1 = $('#btn1')
+			const btn2 = $('#btn2')
+			const content = $('#content')
+
+			btn1.click(()=>{
+				//使用jQuery发送ajax-get（完整版）
+				$.ajax({
+					url:'http://127.0.0.1:8080/test_jquery_get', //请求地址
+					method:'GET',//请求方式（默认值是GET）
+					data:{school:'atguigu'},//携带的数据
+					dataType:'json',//配置响应数据格式
+					timeout:2000,//指定超时的时间
+					success:(result,reponseText,xhr)=>{
+						console.log(result,reponseText,xhr);
+						content.append(`<div>汽车名：${result.name}，价格：${result.price}</div>`)
+					},//成功的回调
+					error:(xhr)=>{console.log('请求出错了',xhr);} //失败的回调
+				})
+
+				//使用jQuery发送ajax-get（精简版）
+				/* $.get('http://127.0.0.1:8080/test_jquery_get',{school:'atguigu'},(data)=>{
+					console.log(data);
+					content.append(`<div>汽车名：${data.name}，价格：${data.price}</div>`)
+				},'json') */
+			})
+
+			btn2.click(()=>{
+				//使用jQuery发送ajax-post（完整版）
+				$.ajax({
+					url:'http://127.0.0.1:8080/test_jquery_post', //请求地址
+					method:'POST',//请求方式（默认值是GET）
+					data:{school:'atguigu'},//携带的数据
+					dataType:'json',//配置响应数据格式
+					timeout:2000,//指定超时的时间
+					success:(result,reponseText,xhr)=>{
+						console.log(result,reponseText,xhr);
+						content.append(`<div>汽车名：${result.name}，价格：${result.price}</div>`)
+					},//成功的回调
+					error:(xhr)=>{console.log('请求出错了',xhr);} //失败的回调
+				})
+
+				//使用jQuery发送ajax-post（精简版）
+				$.post('http://127.0.0.1:8080/test_jquery_post',{school:'atguigu'},(data)=>{
+					console.log(data);
+					content.append(`<div>汽车名：${data.name}，价格：${data.price}</div>`)
+				},'json')
+			})
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>11_演示回调地狱</title>
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+	</head>
+	<body>
+		<h3>该页面是测试：演示回调地狱（看代码）</h3>
+		<button id="btn1">点我发送请求(jQuery-ajax-get)</button>
+		<script type="text/javascript" >
+			const btn1 = $('#btn1')
+
+			btn1.click(()=>{
+				//使用jQuery发送ajax-get（精简版）
+				$.get('http://127.0.0.1:8080/test_jquery_get',{school:'atguigu'},(data)=>{
+					console.log(data);
+					$.get('http://127.0.0.1:8080/test_jquery_get',{school:'atguigu'},(data)=>{
+						console.log(data);
+						$.get('http://127.0.0.1:8080/test_jquery_get',{school:'atguigu'},(data)=>{
+							console.log(data);
+						},'json')
+					},'json')
+				},'json')
+				
+			})
+
+		</script>
+	</body>
+</html>
