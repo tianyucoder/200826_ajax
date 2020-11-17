@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<button id="btn">点我获取数据</button>
+		<script type="text/javascript" >
+			
+			const btn = document.getElementById('btn')
+			btn.onclick = ()=>{
+				//1.创建script节点
+				const scriptNode = document.createElement('script')
+				//2.给节点指定src属性(请求地址)
+				scriptNode.src = 'http://localhost:8080/test_jsonp'
+				//3.将节点放入页面
+				document.body.appendChild(scriptNode)
+			 	window.demo = (a)=>{
+					console.log(a);
+				}
+			}
+		</script>
+		
+	</body>
+</html>

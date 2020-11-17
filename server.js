@@ -59,6 +59,11 @@ app.post('/test_jquery_post',(request,response)=>{
 	response.send(JSON.stringify(car))
 })
 
+app.get('/test_jsonp',(request,response)=>{
+	const person = [{name:'tom',age:18},{name:'老刘',age:5}]
+	response.send(`demo(${JSON.stringify(person)})`)
+})
+
 //监听
 app.listen(8080,(err)=>{
 	if(!err) {
