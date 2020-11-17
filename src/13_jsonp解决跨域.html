@@ -5,6 +5,7 @@
 		<title>Document</title>
 	</head>
 	<body>
+		<h3>当前页面一定不要用服务器去打开，因为要制造跨域问题，用jsonp去解决</h3>
 		<button id="btn">点我获取数据</button>
 		<script type="text/javascript" >
 			
@@ -13,12 +14,15 @@
 				//1.创建script节点
 				const scriptNode = document.createElement('script')
 				//2.给节点指定src属性(请求地址)
-				scriptNode.src = 'http://localhost:8080/test_jsonp'
+				scriptNode.src = 'http://localhost:8080/test_jsonp?callback=peiqi'
 				//3.将节点放入页面
 				document.body.appendChild(scriptNode)
-			 	window.demo = (a)=>{
+				//4.准备好一个函数
+			 	window.peiqi = (a)=>{
 					console.log(a);
 				}
+				//5.移除已经使用过的script节点
+				document.body.removeChild(scriptNode)
 			}
 		</script>
 		

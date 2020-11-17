@@ -41,10 +41,10 @@
 					/* if(xhr.readyState === 2){
 						xhr.setRequestHeader('demo',123) //配置请求头--报错
 					} */
-					/* if(xhr.readyState === 3){
+					if(xhr.readyState === 3){
 						console.log('3时接收到的数据',xhr.response);
-						console.log('3时接收到的响应头',xhr.getResponseHeader('content-length'));
-					} */
+						console.log('3时接收到的响应头',xhr.getAllResponseHeaders());
+					}
 					if(xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)){
 						console.log(xhr.response);
 						content.innerHTML = `<h3>${xhr.response}</h3>`

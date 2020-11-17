@@ -1,5 +1,6 @@
 //引入express
 const express = require('express')
+const cors = require('cors')
 
 //创建app实例对象
 const app = express()
@@ -7,6 +8,7 @@ const app = express()
 app.use(express.urlencoded({extended:true}))
 //使用中间件解析json编码形式的请求体参数
 app.use(express.json())
+app.use(cors())
 
 //暴露静态资源
 app.use(express.static(__dirname+'/src'))
@@ -14,6 +16,8 @@ app.use(express.static(__dirname+'/src'))
 //响应GET请求--可以接收query参数
 app.get('/test_get',(request,response)=>{
 	console.log('有人请求test_get了--携带的query参数是：',request.query);
+	/* response.setHeader('Access-Control-Allow-Origin','*')
+	response.setHeader('Access-Control-Expose-Headers','*') */
 	response.send('hello_test_get')
 })
 
@@ -59,9 +63,24 @@ app.post('/test_jquery_post',(request,response)=>{
 	response.send(JSON.stringify(car))
 })
 
+/* app.options('/test_put',(request,response)=>{
+	response.setHeader('Access-Control-Allow-Origin','*')
+	response.setHeader('Access-Control-Expose-Headers','*')
+	response.setHeader('Access-Control-Allow-Methods','*')
+	response.send()
+}) */
+
+app.put('/test_put',(request,response)=>{
+/* 	response.setHeader('Access-Control-Allow-Origin','*')
+	response.setHeader('Access-Control-Expose-Headers','*') */
+	response.send('hello_test_put')
+})
+
 app.get('/test_jsonp',(request,response)=>{
+	const {callback} = request.query
+	console.log(callback);
 	const person = [{name:'tom',age:18},{name:'老刘',age:5}]
-	response.send(`demo(${JSON.stringify(person)})`)
+	response.send(`${callback}(${JSON.stringify(person)})`)
 })
 
 //监听

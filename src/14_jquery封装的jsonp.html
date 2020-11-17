@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+	</head>
+	<body>
+		<h3>当前页面一定不要用服务器去打开，因为要制造跨域问题，jquery封装的jsonp</h3>
+		<button id="btn">点我获取数据</button>
+		<script type="text/javascript" >
+			const btn = $('#btn')
+			btn.click(()=>{
+				$.getJSON('http://localhost:8080/test_jsonp?callback=?',{},(data)=>{
+					console.log(data);
+				})
+			})
+		</script>
+		
+	</body>
+</html>
