@@ -45,7 +45,6 @@ app.post('/test_post',(request,response)=>{
 	response.send('hello_test_post')
 })
 
-
 //响应get请求---jquery
 app.get('/test_jquery_get',(request,response)=>{
 	console.log('有人请求test_jquery_get了',request.query);
